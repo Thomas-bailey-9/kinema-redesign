@@ -3,6 +3,49 @@
 Design decisions for the redesign, newest first. For each entry note what changed, why, and the
 source/licence of any new asset.
 
+## 2026-11-17 — Section 3: Quick booking
+**Decision (approved design):** a wide forest-glass booking panel ("Your next cinema night —
+Choose a film, find a time", "Demo screenings") at the foot of the opening: desktop one row
+Film · Date · Time · Continue, overlapping the opening's lower edge; phones/tablets beneath the
+opening content with full-width Film/Continue and Date/Time side by side where readable.
+
+**Implemented**
+- `site/assets/js/demo-data.js` — single shared fictional dataset (`window.KINEMA_DEMO`): 4 sample
+  films (incl. "The Lantern Path"), 20 screenings on Thu 3 – Sun 6 Dec 2026, one sold-out time
+  (The Lantern Path, 5 Dec 19:30) and one fully sold-out date (Fern and the Night Train, 6 Dec).
+- `site/assets/js/quick-booking.js` — connected native selects; validity-preserving changes with
+  explanations; guards that reject sold-out values; summary in a `role="status"` region; state in
+  `window.KinemaDemoState`; Continue opens `#screening-demo` ("Your demo screening": film, full
+  date, time; "This is a portfolio demonstration. No seats have been reserved."; "Change
+  selection"). `<noscript>` message when JavaScript is unavailable.
+- Styling: forest glass with champagne border, dividers between fields, champagne labels with
+  small icons, ivory values, readable disabled explanations (8.8:1), soft hover highlight,
+  champagne focus rings, 220–260 ms transitions, summary fade, Continue reuses the champagne button
+  and light sweep (disabled state is muted with no sweep). Solid fallback without blur.
+
+**Integration adjustments**
+- Header "Book tickets" / "Book" changed from a button opening the Section 1 placeholder dialog to
+  links to `#quick-book` that close the mobile menu, scroll clear of the sticky header (reduced
+  motion: instant) and focus the Film field. The Section 1 "Booking demo coming in Section 6"
+  dialog was removed (superseded). Dialog opening shared via `window.KinemaUI.openDialog`.
+- Concept badge now sits beneath the header at the top of the page on every width (previously fixed
+  bottom-left on desktop), because the booking panel occupies the lower first screen; it never
+  covers controls.
+- Opening shortened on desktop (`min-height: max(620px, 100svh - 176px)`) so the whole panel fits
+  in the first screen at 1440×900; photo credit moved above the overlap.
+- Section 1 checks updated for the new Book behaviour (now 85 checks).
+
+**Assets:** none added — icons are inline SVG drawn for the concept; all data is fictional.
+
+**Verified:** `check-section-03.cjs` 130/130, `check-section-02.cjs` 88/88, `check-section-01.cjs`
+85/85 at 1440×900, 768×1024, 390×844 and 320×640 (plus 360 for Section 1): every one of the 18
+available combinations, both sold-out cases, six change scenarios, forced invalid values, dialog
+and focus return, keyboard-only flow, header Book links (with menu open), overlap, touch targets,
+text fit, reduced motion, no-blur and no-JavaScript.
+
+**Intended benefit:** a clear, explained path from choosing a film to a screening (design
+intentions, not user-tested). Case-study entry: `case-study/03-quick-booking.md`.
+
 ## 2026-11-17 — Section 2: Cinematic opening
 **Decision (approved design):** venue-led cinematic opening — evening exterior photograph, warm
 cinema lights against darker woodland, introduction lower-left with the exact headline "A little

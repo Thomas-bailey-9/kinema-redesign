@@ -141,9 +141,12 @@ Each case-study entry uses: **Before → Redesign → What changed → Why it he
 - **Film listings** captured in the snapshot are dated reference content (programme as of 17 Nov
   2026), not a live programme.
 - **Demonstration data:** schedules, seat availability and prices are clearly labelled as examples.
+  All sample films and screenings live in one shared file, `site/assets/js/demo-data.js`, reused by
+  quick booking now and by film listings, film details and booking later. Dates are explicit
+  (December 2026) and never presented as live availability.
 - **Notice:** every page shows a discreet, visible **"Unofficial portfolio redesign concept"**
-  notice with a link to the official website for real tickets. On desktop it is fixed bottom-left; below 960 px it
-  sits beneath the header at the top of the page so it never covers controls.
+  notice with a link to the official website for real tickets. It sits beneath the header at the top of the page on
+  every width (since Section 3) so it never covers controls; the menu, dialogs and footer repeat it.
 - **No real transactions:** no payments, account submissions, newsletter subscriptions or bookings;
   no data leaves the browser.
 - **Hosting:** GitHub Pages project site, served at `https://tbaileyportfolio.co.uk/kinema-redesign/`

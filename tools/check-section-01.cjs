@@ -81,17 +81,24 @@ const active = (page) => page.evaluate(() => { const a = document.activeElement;
     await page.click('.search-toggle'); await settle(page); await page.mouse.click(700, 600); await settle(page);
     check(`${v} click outside closes search`, await page.getAttribute('.search-toggle', 'aria-expanded') === 'false');
 
-    // Booking dialog
+    // Shared demo-dialog behaviour (Section 1 pattern; since Section 3 the header Book link
+    // goes to the quick-booking panel, so the film-preview dialog is used here)
     const xBefore = await page.evaluate(() => document.querySelector('.site-header__inner').getBoundingClientRect().left);
-    await page.click('.btn-book'); await settle(page);
-    check(`${v} booking dialog open (modal)`, await page.evaluate(() => document.getElementById('booking-demo').open && document.documentElement.classList.contains('is-scroll-locked')));
+    await page.click('.film-card__action'); await settle(page);
+    check(`${v} demo dialog open (modal, scroll locked)`, await page.evaluate(() => document.getElementById('film-preview').open && document.documentElement.classList.contains('is-scroll-locked')));
     const xAfter = await page.evaluate(() => document.querySelector('.site-header__inner').getBoundingClientRect().left);
     check(`${v} no layout shift when scroll locked`, xBefore === xAfter, `${xBefore} → ${xAfter}`);
-    check(`${v} dialog focus inside`, await page.evaluate(() => document.getElementById('booking-demo').contains(document.activeElement)));
-    await shot(page, `${v}-07-booking-demo`);
+    check(`${v} dialog focus inside`, await page.evaluate(() => document.getElementById('film-preview').contains(document.activeElement)));
     await page.keyboard.press('Escape'); await settle(page);
-    check(`${v} Escape closes dialog + restores focus`, !(await page.evaluate(() => document.getElementById('booking-demo').open)) && (await active(page)).includes('btn-book'));
+    check(`${v} Escape closes dialog + restores focus`, !(await page.evaluate(() => document.getElementById('film-preview').open)) && (await active(page)).includes('film-card__action'));
     check(`${v} scroll unlocked after dialog`, !(await page.evaluate(() => document.documentElement.classList.contains('is-scroll-locked'))));
+
+    // Header Book tickets → quick-booking panel (Section 3)
+    await page.click('.btn-book'); await page.waitForTimeout(1200);
+    const bk = await page.evaluate(() => ({ hash: location.hash, focus: document.activeElement.id, panelTop: Math.round(document.querySelector('.quick-book__panel').getBoundingClientRect().top), headerBottom: Math.round(document.querySelector('.site-header__bar').getBoundingClientRect().bottom) }));
+    check(`${v} Book tickets → quick-booking panel, focus on Film`, bk.hash === '#quick-book' && bk.focus === 'qb-film' && bk.panelTop >= bk.headerBottom, JSON.stringify(bk));
+    await shot(page, `${v}-07-book-to-panel`);
+    await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' })); await settle(page);
 
     // Compact on scroll, no layout shift of content
     const mainTop0 = await page.evaluate(() => document.getElementById('whats-on').getBoundingClientRect().top + scrollY);
@@ -144,11 +151,15 @@ const active = (page) => page.evaluate(() => { const a = document.activeElement;
     check(`${v} compact after navigating`, await page.evaluate(() => document.getElementById('site-header').classList.contains('is-compact')));
     await shot(page, `${v}-03-compact`);
 
-    await page.tap('.btn-book'); await settle(page);
-    check(`${v} booking demo dialog opens`, await page.evaluate(() => document.getElementById('booking-demo').open));
-    await shot(page, `${v}-04-booking-demo`);
-    await page.tap('[data-close-dialog]'); await settle(page);
-    check(`${v} dialog close restores focus`, (await active(page)).includes('btn-book'));
+    await page.tap('.menu-toggle'); await settle(page);
+    await page.tap('.btn-book'); await page.waitForTimeout(1200);
+    const bk = await page.evaluate(() => ({ hash: location.hash, focus: document.activeElement.id, menuClosed: document.getElementById('mobile-menu').hidden, locked: document.documentElement.classList.contains('is-scroll-locked'), panelTop: Math.round(document.querySelector('.quick-book__panel').getBoundingClientRect().top), headerBottom: Math.round(document.querySelector('.site-header__bar').getBoundingClientRect().bottom) }));
+    check(`${v} Book (menu open) closes menu → quick-booking panel, focus on Film`, bk.hash === '#quick-book' && bk.focus === 'qb-film' && bk.menuClosed && !bk.locked && bk.panelTop >= bk.headerBottom, JSON.stringify(bk));
+    await shot(page, `${v}-04-book-to-panel`);
+    await page.tap('.film-card__action'); await settle(page);
+    check(`${v} demo dialog opens`, await page.evaluate(() => document.getElementById('film-preview').open));
+    await page.tap('#film-preview [data-close-dialog]'); await settle(page);
+    check(`${v} dialog close restores focus`, (await active(page)).includes('film-card__action'));
     check(`${v} no console/network errors`, errors.length === 0, errors.join('; '));
     await ctx.close();
   }

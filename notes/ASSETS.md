@@ -10,6 +10,8 @@ snapshot (`reference/`) is used.
 | `fonts/cormorant-garamond-latin-600-normal.woff2` | Fontsource `@fontsource/cormorant-garamond` 5.3.0 | The Cormorant Project Authors | SIL OFL 1.1 (`fonts/OFL-Cormorant-Garamond.txt`) | Latin subset file only | Section 1 |
 | `fonts/inter-latin-wght-normal.woff2` | Fontsource `@fontsource-variable/inter` 5.3.0 | The Inter Project Authors | SIL OFL 1.1 (`fonts/OFL-Inter.txt`) | Latin subset file only | Section 1 |
 | Inline SVG icons (search, menu, clear) | Drawn for this concept | Project | Original | — | Section 1 |
+| Inline SVG field icons (film, calendar, clock) | Drawn for this concept | Project | Original | — | Section 3 |
+| `js/demo-data.js` (sample films and screenings) | Written for this concept | Project | Original, fictional | — | Section 3 |
 
 **Attribution on the site:** the opening shows "Photo: The Kinema in the Woods at dusk © Neil
 Theasby, CC BY-SA 2.0 (cropped, resized)" with links to the Commons file page, the photographer's
