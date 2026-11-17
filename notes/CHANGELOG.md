@@ -13,7 +13,10 @@ source/licence of any new asset.
     Fixed with `grid-template-columns: minmax(0, 1fr)`.
 - Added `.github/workflows/pages.yml`: deploys only `site/` to GitHub Pages via GitHub Actions on
   pushes to `main` that touch `site/` (or manually). Published URL:
-  https://thomas-bailey-9.github.io/kinema-redesign/
+  https://tbaileyportfolio.co.uk/kinema-redesign/ (the account's existing Pages custom domain;
+  the github.io address redirects there).
+- First run failed at "Configure Pages": a workflow token cannot switch Pages on. Pages must be
+  enabled once in Settings → Pages → Source: GitHub Actions, then the run re-run.
 - Screenshots added: `phone-320-01-expanded.webp`, `phone-320-02-menu-open.webp`.
 
 ## 2026-11-17 — Section 1: Header and navigation

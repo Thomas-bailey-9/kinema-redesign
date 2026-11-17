@@ -95,7 +95,8 @@ Each case-study entry uses: **Before → Redesign → What changed → Why it he
   notice with a link to the official website for real tickets.
 - **No real transactions:** no payments, account submissions, newsletter subscriptions or bookings;
   no data leaves the browser.
-- **Hosting:** GitHub Pages project site at `https://thomas-bailey-9.github.io/kinema-redesign/`.
+- **Hosting:** GitHub Pages project site, served at `https://tbaileyportfolio.co.uk/kinema-redesign/`
+  (the account's Pages custom domain; the github.io address redirects there).
   All links and asset paths are relative so the site works locally and under `/kinema-redesign/`.
   Routes for separate views (film details, booking, case study) must work on GitHub Pages without
   server rewrites — approach to be agreed when the first such view is built. Planned deployment: a

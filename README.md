@@ -19,7 +19,8 @@ An independent portfolio redesign concept for [thekinemainthewoods.co.uk](https:
 
 ## Published preview
 
-https://thomas-bailey-9.github.io/kinema-redesign/ — deployed from `site/` only by
+https://tbaileyportfolio.co.uk/kinema-redesign/ (the account's Pages custom domain;
+`https://thomas-bailey-9.github.io/kinema-redesign/` redirects there) — deployed from `site/` only by
 `.github/workflows/pages.yml` on pushes to `main` that change `site/`.
 
 ## Run locally
