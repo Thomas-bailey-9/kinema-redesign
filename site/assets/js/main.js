@@ -1,5 +1,6 @@
 // Kinema in the Woods — unofficial redesign concept.
-// Section 1: header state, search panel, mobile menu and booking-demo dialog.
+// Section 1: header state, search panel, mobile menu and demo dialogs.
+// Section 2: opening image settle; opening actions reuse the section-link handler.
 // Demo only: nothing here sends data anywhere.
 (() => {
   'use strict';
@@ -10,7 +11,6 @@
   const searchPanel = document.getElementById('search-panel');
   const menuToggle = header.querySelector('.menu-toggle');
   const menu = document.getElementById('mobile-menu');
-  const dialog = document.getElementById('booking-demo');
   const desktopQuery = window.matchMedia('(min-width: 960px)');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const PANEL_MS = 260;
@@ -111,7 +111,7 @@
     if (target.tabIndex >= 0 || target.hasAttribute('tabindex')) target.focus({ preventScroll: true });
     history.pushState(null, '', hash);
   };
-  document.querySelectorAll('.nav-link, .mobile-menu__link, .wordmark').forEach((link) => {
+  document.querySelectorAll('.nav-link, .mobile-menu__link, .wordmark, [data-section-link]').forEach((link) => {
     link.addEventListener('click', (e) => {
       const hash = link.getAttribute('href');
       if (!hash || !hash.startsWith('#')) return;
@@ -138,27 +138,48 @@
     input.addEventListener('search', render); // clearing via the native ✕
   });
 
-  /* ---------- Booking demo dialog ---------- */
+  /* ---------- Demo dialogs (booking demo, film preview) ---------- */
+  // Native modal <dialog>: focus is contained and Escape closes it; we restore focus
+  // to the control that opened it and lock page scroll while it is open.
   let dialogOpener = null;
-  document.querySelectorAll('[data-open-booking]').forEach((btn) => {
+  document.querySelectorAll('[data-open-dialog]').forEach((btn) => {
+    const target = document.getElementById(btn.dataset.openDialog);
+    if (!target) return;
     btn.addEventListener('click', () => {
       closeSearch();
       dialogOpener = btn;
-      dialog.showModal();
+      target.showModal();
       lockScroll('dialog', true);
     });
   });
-  dialog.querySelector('[data-close-dialog]').addEventListener('click', () => dialog.close());
-  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); }); // backdrop
-  dialog.addEventListener('close', () => {
-    lockScroll('dialog', false);
-    if (dialogOpener && dialogOpener.isConnected) dialogOpener.focus();
-    dialogOpener = null;
+  document.querySelectorAll('dialog.demo-dialog').forEach((dlg) => {
+    dlg.querySelectorAll('[data-close-dialog]').forEach((b) => b.addEventListener('click', () => dlg.close()));
+    dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); }); // backdrop
+    dlg.addEventListener('close', () => {
+      lockScroll('dialog', false);
+      if (dialogOpener && dialogOpener.isConnected) dialogOpener.focus();
+      dialogOpener = null;
+    });
   });
+  const anyDialogOpen = () => !!document.querySelector('dialog[open]');
+
+  /* ---------- Section 2: opening image settle ---------- */
+  // Content and actions are visible immediately; only the photograph eases from 1.03 to 1.
+  const opening = document.querySelector('.opening');
+  const openingImg = opening && opening.querySelector('.opening__img');
+  if (openingImg && !reducedMotion.matches) {
+    opening.classList.add('is-settling');
+    const settle = () => requestAnimationFrame(() => requestAnimationFrame(() => opening.classList.add('is-settled')));
+    if (openingImg.complete) settle();
+    else {
+      openingImg.addEventListener('load', settle, { once: true });
+      openingImg.addEventListener('error', settle, { once: true });
+    }
+  }
 
   /* ---------- Escape closes the topmost open panel ---------- */
   document.addEventListener('keydown', (e) => {
-    if (e.key !== 'Escape' || dialog.open) return; // the dialog handles its own Escape
+    if (e.key !== 'Escape' || anyDialogOpen()) return; // dialogs handle their own Escape
     if (isOpen(searchToggle)) { e.preventDefault(); closeSearch({ restoreFocus: true }); }
     else if (isOpen(menuToggle)) { e.preventDefault(); closeMenu({ restoreFocus: true }); }
   });

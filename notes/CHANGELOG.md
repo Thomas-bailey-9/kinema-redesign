@@ -3,6 +3,50 @@
 Design decisions for the redesign, newest first. For each entry note what changed, why, and the
 source/licence of any new asset.
 
+## 2026-11-17 — Section 2: Cinematic opening
+**Decision (approved design):** venue-led cinematic opening — evening exterior photograph, warm
+cinema lights against darker woodland, introduction lower-left with the exact headline "A little
+woodland. A little wonder. A world of cinema.", supporting line, "Explore what's on" (primary) and
+"Discover the Kinema" (secondary), and a compact "Featured film · Demo" glass panel lower-right.
+Stacked on phones/tablets: introduction first, panel beneath, natural height.
+
+**Photography:** authentic venue photography sourced under licence — "Kinema in the Woods, Woodhall
+Spa", Neil Theasby, 15 Feb 2016 (dusk), Wikimedia Commons / Geograph 4831322, **CC BY-SA 2.0**.
+Cropped (landscape + 4:5 portrait), resized to 1100/1600/2400 and 560/800/1200 WebP (53–370 KB),
+metadata stripped; credited on the page; details in `ASSETS.md`. No temporary or placeholder
+imagery remains in the opening. (A new personal environment, `kinema-redesign`, was approved to
+reach Wikimedia Commons.)
+
+**Implemented**
+- Replaced the temporary CSS opening with `<section class="opening">`: responsive `<picture>`
+  (portrait crop below 600 px), `fetchpriority="high"`, not lazy-loaded; forest/charcoal gradient
+  shade; headline as the page `<h1>`.
+- Featured-film panel: original SVG artwork (`sample-film-lantern-path.svg`), fictional sample
+  "The Lantern Path", "Sample film for this concept — not the cinema's programme" note; "View film"
+  opens `#film-preview`, a native modal dialog labelled "Film preview · Demo" stating it has no
+  screenings and that details/showtimes come in Section 5. No availability shown.
+- Buttons: `.btn-primary` shares the approved Book-button rules (champagne, lift, one-shot sweep);
+  new `.btn-glass` secondary with matching glass, lift and softer sweep.
+- Motion: image settle 1.03→1 over 1.6 s once the image is ready (no delay to content); 700 ms
+  fade-up reveal of introduction and panel (panel +120 ms); panel hover/focus lift with brighter
+  edge and contained 1.06 artwork zoom. All removed under `prefers-reduced-motion`.
+- Fallbacks: solid forest panel and glass buttons when `backdrop-filter` is unavailable.
+
+**Integration adjustments (Section 1)**
+- Dialog code generalised (`data-open-dialog`) so the booking demo and film preview share focus
+  return, Escape and scroll lock; opening actions reuse the section-link handler.
+- Below 960 px the concept badge now sits at the top of the page beneath the header instead of
+  fixed at the bottom, because the stacked opening placed it over the film panel's controls. It
+  remains visible on arrival; the menu, dialogs and footer repeat the notice. Desktop unchanged.
+- Opening sky gradient deepened behind the header after measuring 2.3–2.9:1 for header text over
+  the pale sky; now 6.8–8.0:1.
+
+**Verified:** `tools/check-section-02.cjs` 88/88 and `tools/check-section-01.cjs` 80/80 at 1440×900,
+768×1024, 390×844 and 320×640 (plus 360 for Section 1), served under `/kinema-redesign/`.
+
+**Intended benefit:** an immediate sense of the real venue and a clear first step to finding a film
+(design intentions, not user-tested). Case-study entry: `case-study/02-cinematic-opening.md`.
+
 ## 2026-11-17 — Section 1 live; portfolio case-study scope clarified
 - **Deployed:** Pages source set to GitHub Actions by the project owner; re-run of workflow run
   44116018570 succeeded (commit `861f6fa`). Section 1 is live at

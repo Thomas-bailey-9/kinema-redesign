@@ -135,13 +135,15 @@ Each case-study entry uses: **Before → Redesign → What changed → Why it he
   `reference/` and is never committed or deployed. Before images for a published case study need a
   decision on reuse permission first.
 - **Assets:** only original or appropriately licensed images, fonts and icons in `site/`. Record the
-  source and licence of each in `CHANGELOG.md`. Nothing from the snapshot is reused unless
+  source and licence of each in `ASSETS.md` (register) and `CHANGELOG.md`. CC BY-SA images must be
+  credited visibly on the page. Nothing from the snapshot is reused unless
   permission is established and recorded.
 - **Film listings** captured in the snapshot are dated reference content (programme as of 17 Nov
   2026), not a live programme.
 - **Demonstration data:** schedules, seat availability and prices are clearly labelled as examples.
 - **Notice:** every page shows a discreet, visible **"Unofficial portfolio redesign concept"**
-  notice with a link to the official website for real tickets.
+  notice with a link to the official website for real tickets. On desktop it is fixed bottom-left; below 960 px it
+  sits beneath the header at the top of the page so it never covers controls.
 - **No real transactions:** no payments, account submissions, newsletter subscriptions or bookings;
   no data leaves the browser.
 - **Hosting:** GitHub Pages project site, served at `https://tbaileyportfolio.co.uk/kinema-redesign/`

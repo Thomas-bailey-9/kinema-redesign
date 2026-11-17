@@ -43,7 +43,7 @@
             <span class="visually-hidden">Search films</span>
           </button>
 
-          <button class="btn-book" type="button" data-open-booking>
+          <button class="btn-book" type="button" data-open-dialog="booking-demo">
             Book<span class="btn-book__more"> tickets</span>
           </button>
 
@@ -109,13 +109,62 @@
   </p>
 
   <main id="main" tabindex="-1">
-    <h1 class="visually-hidden">Kinema in the Woods — unofficial redesign concept</h1>
+    <!-- ===== Section 2: Cinematic opening ===== -->
+    <section class="opening" id="top" aria-labelledby="opening-title">
+      <picture class="opening__media">
+        <source media="(max-width: 599.98px)" type="image/webp"
+          srcset="assets/img/opening/kinema-dusk-portrait-560.webp 560w,
+                  assets/img/opening/kinema-dusk-portrait-800.webp 800w,
+                  assets/img/opening/kinema-dusk-portrait-1200.webp 1200w"
+          sizes="100vw">
+        <img class="opening__img"
+          src="assets/img/opening/kinema-dusk-1600.webp"
+          srcset="assets/img/opening/kinema-dusk-1100.webp 1100w,
+                  assets/img/opening/kinema-dusk-1600.webp 1600w,
+                  assets/img/opening/kinema-dusk-2400.webp 2400w"
+          sizes="100vw" width="1600" height="1040"
+          alt="The Kinema in the Woods at dusk: a timber-framed cinema with a glowing red neon sign and festoon lights, beneath bare winter trees."
+          fetchpriority="high" decoding="async">
+      </picture>
+      <div class="opening__shade" aria-hidden="true"></div>
 
-    <!-- Temporary opening background (Section 2 will design the cinematic opening) -->
-    <section class="opening-temp" id="top" aria-label="Temporary opening background">
-      <div class="opening-temp__light" aria-hidden="true"></div>
-      <p class="placeholder-tag placeholder-tag--opening">
-        Temporary opening background · the cinematic opening is designed in Section 2
+      <div class="opening__content">
+        <div class="opening__intro">
+          <h1 class="opening__title" id="opening-title">
+            <span class="opening__line">A little woodland.</span>
+            <span class="opening__line">A little wonder.</span>
+            <span class="opening__line">A world of cinema.</span>
+          </h1>
+          <p class="opening__lede">Make an evening of it. Discover your next film at The Kinema in the Woods.</p>
+          <div class="opening__actions">
+            <a class="btn-primary" href="#whats-on" data-section-link>Explore what’s on</a>
+            <a class="btn-glass" href="#our-story" data-section-link>Discover the Kinema</a>
+          </div>
+        </div>
+
+        <article class="film-card" aria-labelledby="film-card-title">
+          <p class="film-card__label">Featured film · Demo</p>
+          <div class="film-card__body">
+            <div class="film-card__art">
+              <img src="assets/img/sample-film-lantern-path.svg" width="400" height="560"
+                alt="Sample artwork: a moonlit pine wood with a trail of warm lanterns." decoding="async">
+            </div>
+            <div class="film-card__text">
+              <h2 class="film-card__title" id="film-card-title">The Lantern Path</h2>
+              <p class="film-card__desc">A retired projectionist follows a trail of lanterns through the winter woods to return a long-lost reel.</p>
+              <button class="btn-glass btn-glass--sm film-card__action" type="button" data-open-dialog="film-preview">
+                View film<span class="visually-hidden">: The Lantern Path (sample)</span>
+              </button>
+            </div>
+          </div>
+          <p class="film-card__note">Sample film for this concept — not the cinema’s programme.</p>
+        </article>
+      </div>
+
+      <p class="opening__credit">
+        Photo: <a href="https://commons.wikimedia.org/wiki/File:Kinema_in_the_Woods,_Woodhall_Spa_-_geograph.org.uk_-_4831322.jpg" rel="noopener">The Kinema in the Woods at dusk</a>
+        © <a href="https://www.geograph.org.uk/photo/4831322" rel="noopener">Neil Theasby</a>,
+        <a href="https://creativecommons.org/licenses/by-sa/2.0/" rel="noopener license">CC BY-SA 2.0</a> (cropped, resized)
       </p>
     </section>
 
@@ -179,6 +228,21 @@
       <p id="booking-demo-desc">Seat selection and booking will be a clearly fictional demonstration.
         No reservations, payments or accounts — nothing entered will be sent anywhere.</p>
       <p>For real tickets, use <a href="https://thekinemainthewoods.co.uk/" rel="noopener">the official website</a>.</p>
+      <button class="btn-secondary" type="button" data-close-dialog>Close</button>
+    </div>
+  </dialog>
+  <!-- Featured-film preview (sample) — replaced by the film-details view in Section 5 -->
+  <dialog class="demo-dialog demo-dialog--film" id="film-preview" aria-labelledby="film-preview-title" aria-describedby="film-preview-desc">
+    <div class="demo-dialog__inner">
+      <p class="demo-dialog__eyebrow">Film preview · Demo</p>
+      <div class="demo-dialog__film">
+        <img class="demo-dialog__art" src="assets/img/sample-film-lantern-path.svg" width="400" height="560" alt="" decoding="async">
+        <div>
+          <h2 class="demo-dialog__title" id="film-preview-title">The Lantern Path</h2>
+          <p id="film-preview-desc">A retired projectionist follows a trail of lanterns through the winter woods to return a long-lost reel.</p>
+        </div>
+      </div>
+      <p class="demo-dialog__note">This is a sample film created for the redesign concept — it is not part of The Kinema in the Woods’ programme and has no screenings. Film details and showtimes will be added in Section 5.</p>
       <button class="btn-secondary" type="button" data-close-dialog>Close</button>
     </div>
   </dialog>
