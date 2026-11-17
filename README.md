@@ -17,6 +17,11 @@ An independent portfolio redesign concept for [thekinemainthewoods.co.uk](https:
 | `tools/` | Local helper scripts (serve, screenshot) — no installed dependencies | Yes |
 | `reference/` | Third-party homepage snapshot + baseline screenshots | **No** (git-ignored) |
 
+## Published preview
+
+https://thomas-bailey-9.github.io/kinema-redesign/ — deployed from `site/` only by
+`.github/workflows/pages.yml` on pushes to `main` that change `site/`.
+
 ## Run locally
 
 ```bash

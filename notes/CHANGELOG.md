@@ -3,6 +3,19 @@
 Design decisions for the redesign, newest first. For each entry note what changed, why, and the
 source/licence of any new asset.
 
+## 2026-11-17 — Section 1: 320 px check and GitHub Pages deployment
+- Added a 320×640 check (now 80 checks across 1440, 390, 360, 320 and 768 px). It found two
+  narrow-screen issues, both fixed without changing the design at 360 px and wider:
+  - Header controls needed ~314 px but only 268 px was available, pushing Menu 38 px off-screen.
+    Fixed with a `max-width: 359.98px` rule tightening gutter, gaps, wordmark size and button
+    padding.
+  - The menu panel's grid column would not shrink below the search row (380 px wide at 320 px).
+    Fixed with `grid-template-columns: minmax(0, 1fr)`.
+- Added `.github/workflows/pages.yml`: deploys only `site/` to GitHub Pages via GitHub Actions on
+  pushes to `main` that touch `site/` (or manually). Published URL:
+  https://thomas-bailey-9.github.io/kinema-redesign/
+- Screenshots added: `phone-320-01-expanded.webp`, `phone-320-02-menu-open.webp`.
+
 ## 2026-11-17 — Section 1: Header and navigation
 **Decision (approved design):** cinematic woodland glass header — spacious and translucent over the
 opening, transitioning on scroll into a compact sticky forest-green bar. Desktop: wordmark left;

@@ -1,7 +1,7 @@
 # 1. Header and navigation
 
 Status: implemented 17 Nov 2026 (awaiting review). Screenshots: `notes/screenshots/section-01/`
-(1440×900 desktop, 390×844 phone, plus 360×740 and 768×1024). Matching "before" crops of the saved
+(1440×900 desktop, 390×844 phone, plus 360×740, 320×640 and 768×1024). Matching "before" crops of the saved
 snapshot are kept privately in `reference/screenshots/comparison/section-01/` (not published).
 
 ## Before (saved homepage snapshot, 17 Nov 2026)

@@ -1,5 +1,5 @@
 // Section 1 (header and navigation) checks: states, keyboard, focus, scroll lock,
-// reduced motion and the no-backdrop-filter fallback at 1440, 390, 360 and 768 px.
+// reduced motion and the no-backdrop-filter fallback at 1440, 390, 360, 320 and 768 px.
 // Usage: node tools/check-section-01.cjs <screenshotDir> [url]
 // Serve site/ under a /kinema-redesign/ sub-path first to mirror GitHub Pages, e.g.
 //   mkdir -p /tmp/pages && ln -s "$PWD/site" /tmp/pages/kinema-redesign
@@ -114,18 +114,19 @@ const active = (page) => page.evaluate(() => { const a = document.activeElement;
   }
 
   /* ===== Phone / tablet ===== */
-  for (const [v, vp] of [['phone-390', { width: 390, height: 844 }], ['phone-360', { width: 360, height: 740 }], ['tablet-768', { width: 768, height: 1024 }]]) {
+  for (const [v, vp] of [['phone-390', { width: 390, height: 844 }], ['phone-360', { width: 360, height: 740 }], ['tablet-768', { width: 768, height: 1024 }], ['phone-320', { width: 320, height: 640 }]]) {
     const { ctx, page, errors } = await newPage(browser, vp, { mobile: true });
     check(`${v} no horizontal overflow`, await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
     check(`${v} menu toggle visible, nav/search icon hidden`, await page.isVisible('.menu-toggle') && !(await page.isVisible('.primary-nav')) && !(await page.isVisible('.search-toggle')));
     const bookName = await page.evaluate(() => document.querySelector('.btn-book').textContent.replace(/\s+/g, ' ').trim());
     check(`${v} Book button accessible name`, bookName === 'Book tickets', bookName);
-    const fit = await page.evaluate(() => { const r = document.querySelector('.menu-toggle').getBoundingClientRect(); const w = document.querySelector('.wordmark').getBoundingClientRect(); const b = document.querySelector('.btn-book').getBoundingClientRect(); return r.right <= innerWidth && w.right < b.left; });
+    const fit = await page.evaluate(() => { const r = document.querySelector('.menu-toggle').getBoundingClientRect(); const w = document.querySelector('.wordmark').getBoundingClientRect(); const b = document.querySelector('.btn-book').getBoundingClientRect(); const bar = document.querySelector('.site-header__bar').getBoundingClientRect(); return r.right <= Math.min(innerWidth, bar.right) && w.right < b.left; });
     check(`${v} header controls fit without overlap`, fit);
     await shot(page, `${v}-01-top`);
 
     await page.tap('.menu-toggle'); await settle(page);
     const st = await page.evaluate(() => ({ exp: document.querySelector('.menu-toggle').getAttribute('aria-expanded'), locked: document.documentElement.classList.contains('is-scroll-locked'), inert: document.getElementById('main').inert, visible: !document.getElementById('mobile-menu').hidden }));
+    check(`${v} menu panel has no horizontal overflow`, await page.evaluate(() => { const m = document.getElementById('mobile-menu'); return m.scrollWidth <= m.clientWidth; }));
     check(`${v} menu opens (expanded, locked, background inert)`, st.exp === 'true' && st.locked && st.inert && st.visible, JSON.stringify(st));
     const y0 = await page.evaluate(() => scrollY);
     await page.mouse.wheel(0, 500); await page.waitForTimeout(300);

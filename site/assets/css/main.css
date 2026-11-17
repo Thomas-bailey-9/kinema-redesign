@@ -636,6 +636,7 @@ main:focus, section:focus { outline: none; box-shadow: none; }
 }
 .mobile-menu__inner {
   display: grid;
+  grid-template-columns: minmax(0, 1fr); /* let the search row shrink on narrow screens */
   gap: var(--space-6);
   max-width: 560px;
   margin: 0 auto;
@@ -742,6 +743,18 @@ main:focus, section:focus { outline: none; box-shadow: none; }
 }
 @media (min-width: 960px) {
   .mobile-menu { display: none !important; }
+}
+/* Very narrow phones (320–359 px): tighten spacing so wordmark, Book and Menu fit. */
+@media (max-width: 359.98px) {
+  :root { --gutter: 10px; }
+  .site-header__inner { padding: 0 6px 0 10px; gap: 6px; }
+  .header-actions { gap: 6px; }
+  .wordmark { padding: 4px 2px; }
+  .wordmark__name { font-size: 1.3rem; }
+  .wordmark__sub { font-size: 0.5rem; letter-spacing: 0.3em; }
+  .btn-book { padding: 0 14px; }
+  .menu-toggle { gap: 8px; padding: 0 12px 0 10px; }
+  .concept-badge { left: 8px; bottom: 8px; max-width: calc(100vw - 16px); }
 }
 
 /* ---------- Fallback when backdrop blur is unavailable ---------- */
