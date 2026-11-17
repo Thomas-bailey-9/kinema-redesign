@@ -13,10 +13,59 @@ concept, not a replacement site, and is not affiliated with or endorsed by the c
 **Deliverables**
 1. A responsive demonstration website, prepared for GitHub Pages.
 2. A before-and-after case study covering the ten design areas below.
-3. A short slideshow or comparison presentation explaining what changed and why.
+3. A separate comparison presentation covering the same ten areas, with a link to explore the
+   finished redesign.
 
 **Cinema first.** The demonstration site should feel like a real cinema website. The portfolio
 comparison lives in a separate presentation or route and does not interrupt the cinema experience.
+
+## Portfolio case study (clarified 17 Nov 2026)
+**The final portfolio project is a before-and-after case study** showing how the project owner can
+transform a website's appearance and improve its visitor experience through their creative
+direction and design decisions.
+
+**Sequence**
+1. Complete all ten agreed design areas first.
+2. Then create the separate comparison presentation covering those same ten areas, with a link to
+   explore the finished redesign. Its exact presentation design is decided only after the ten areas
+   are complete — do not build it before then.
+
+**Evidence to preserve for each area** (record as we go, so it is ready at the end):
+1. An appropriate original reference, where available — reuse existing reference captures where
+   suitable rather than recapturing.
+2. The approved redesigned version at matching desktop and mobile sizes (1440×900 and 390×844, plus
+   extra widths where relevant).
+3. A concise explanation of what changed.
+4. The design reasoning — typography, colours, imagery, layout, navigation, motion or interaction.
+5. The intended benefit for visitors.
+
+Record decisions in `CHANGELOG.md`, keep a per-area entry in `case-study/`, and capture
+screenshots in `screenshots/section-NN/` at each approved milestone.
+
+**Presentation goals:** visual and easy for recruiters to browse — large before-and-after views,
+short explanations, and optional deeper detail.
+
+**Attribution — represent the contribution accurately**
+- The project owner's contribution: creative direction, design choices, iterative feedback and
+  review.
+- Implementation is AI-assisted, through Claude. Do not imply the owner manually coded everything.
+- The project is independent and unofficial. Do not imply The Kinema in the Woods commissioned,
+  endorsed or was involved in it.
+
+**Evidence categories — keep them distinct in every comparison**
+- **Verified original-site observations** — confirmed against the live website.
+- **Snapshot limitations** — artefacts of the saved static snapshot (e.g. encoding faults, hidden
+  carousel, disabled scripts and navigation); never presented as original-site problems.
+- **New concepts** — features with no captured original equivalent (e.g. seat selection); no
+  invented "before" view.
+
+Note: the live site has not yet been reachable from the build environment, so current "before"
+descriptions are snapshot observations, not verified live-site observations.
+
+**Publication limits:** do not publish third-party reference screenshots (including in the
+comparison presentation) until their permitted use is resolved. Do not invent performance,
+conversion or visitor-behaviour improvements; benefits are design intentions unless testing
+provides evidence.
 
 ## Design direction
 Modern cinematic design blended with a distinctive woodland identity. Explore:
@@ -108,7 +157,8 @@ Each case-study entry uses: **Before → Redesign → What changed → Why it he
 
 ## Open decisions
 - Route approach for separate views on GitHub Pages.
-- Format and location of the comparison presentation (separate route vs. standalone slideshow).
-- Whether and how reference "before" images may appear in a published case study.
+- Whether and how reference "before" images may appear in the published comparison
+  (requires resolving permitted use first).
+- Exact design of the comparison presentation — decided after all ten areas are complete.
 - Typography, palette values, iconography and motion — set per approved area (Section 1 set the
   first tokens and fonts; see `CHANGELOG.md`).

@@ -3,6 +3,24 @@
 Design decisions for the redesign, newest first. For each entry note what changed, why, and the
 source/licence of any new asset.
 
+## 2026-11-17 — Section 1 live; portfolio case-study scope clarified
+- **Deployed:** Pages source set to GitHub Actions by the project owner; re-run of workflow run
+  44116018570 succeeded (commit `861f6fa`). Section 1 is live at
+  https://tbaileyportfolio.co.uk/kinema-redesign/ and confirmed working by the project owner.
+- **Brief clarified** (`PROJECT_BRIEF.md` → "Portfolio case study"): the final portfolio piece is a
+  before-and-after case study; complete all ten areas first, then build a separate comparison
+  presentation for the same ten areas linking to the redesign. Per area, preserve: original
+  reference (where available), approved redesign at matching desktop/mobile sizes, what changed,
+  design reasoning, and intended visitor benefit. Presentation aimed at recruiters: large
+  before/after views, short explanations, optional detail; exact design decided later.
+- **Attribution rule:** owner's creative direction, design choices, iterative feedback and review,
+  with AI-assisted implementation through Claude; not hand-coded by the owner, not commissioned by
+  the cinema.
+- **Evidence categories** kept distinct: verified original-site observations, snapshot
+  limitations, new concepts. No third-party screenshots published without permission; no invented
+  performance or conversion claims.
+- No changes to the live site.
+
 ## 2026-11-17 — Section 1: 320 px check and GitHub Pages deployment
 - Added a 320×640 check (now 80 checks across 1440, 390, 360, 320 and 768 px). It found two
   narrow-screen issues, both fixed without changing the design at 360 px and wider:
