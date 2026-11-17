@@ -63,7 +63,7 @@ bottom navigation bar on desktop / hamburger on phone. Pages are very long: ~29,
 errors at both widths. The 3 `<script>` tags are inside an `<!--[if lt IE 9]>` comment, so modern
 browsers ignore them. Links use `onclick="return false"` and forms `onsubmit="return false"`.
 
-**Problems found:**
+**Observed in the snapshot** (capture limitations or snapshot behaviour — not verified defects of the live site):
 1. **Text encoding (mojibake).** The HTML is UTF-8 but declares no charset, so browsers decode it as
    Windows-1252: "•" shows as "â€¢" (reference banner), "©" as "Â©" (footer), "’" as "â€™" (e.g. the
    André Rieu title), plus accented letters. 36 non-ASCII characters are affected.
