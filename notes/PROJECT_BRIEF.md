@@ -109,4 +109,5 @@ Each case-study entry uses: **Before → Redesign → What changed → Why it he
 - Route approach for separate views on GitHub Pages.
 - Format and location of the comparison presentation (separate route vs. standalone slideshow).
 - Whether and how reference "before" images may appear in a published case study.
-- Typography, palette values, iconography and motion — set per approved area.
+- Typography, palette values, iconography and motion — set per approved area (Section 1 set the
+  first tokens and fonts; see `CHANGELOG.md`).

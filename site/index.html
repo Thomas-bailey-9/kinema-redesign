@@ -4,18 +4,183 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kinema in the Woods — Unofficial Redesign Concept</title>
+  <meta name="description" content="An unofficial portfolio redesign concept for The Kinema in the Woods. Not affiliated with the cinema.">
   <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0f1f18">
+  <link rel="preload" href="assets/fonts/inter-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.css">
+  <script src="assets/js/main.js" defer></script>
 </head>
 <body>
-  <div class="concept-notice" role="note">
-    Unofficial portfolio concept — not affiliated with The Kinema in the Woods. Booking is a
-    demonstration only. For real tickets visit
-    <a href="https://thekinemainthewoods.co.uk/" rel="noopener">the official website</a>.
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== Section 1: Header and navigation ===== -->
+  <header class="site-header" id="site-header">
+    <div class="site-header__bar">
+      <div class="site-header__inner">
+        <a class="wordmark" href="#top">
+          <span class="wordmark__name">Kinema</span>
+          <span class="wordmark__sub">In the Woods</span>
+          <span class="visually-hidden"> — back to top</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="Main">
+          <ul class="primary-nav__list">
+            <li><a class="nav-link" href="#whats-on">What’s On</a></li>
+            <li><a class="nav-link" href="#experiences">Experiences</a></li>
+            <li><a class="nav-link" href="#our-story">Our Story</a></li>
+            <li><a class="nav-link" href="#visit">Visit</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button class="icon-btn search-toggle" type="button" aria-expanded="false" aria-controls="search-panel">
+            <svg class="icon icon--search" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M15.4 15.4 20 20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            </svg>
+            <span class="visually-hidden">Search films</span>
+          </button>
+
+          <button class="btn-book" type="button" data-open-booking>
+            Book<span class="btn-book__more"> tickets</span>
+          </button>
+
+          <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
+            <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span></span>
+            <span class="menu-toggle__label">Menu</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop search panel -->
+    <div class="panel search-panel" id="search-panel" hidden>
+      <form class="film-search" role="search" aria-label="Film search (demo)" data-film-search>
+        <label class="film-search__label" for="search-input-desktop">Search films</label>
+        <div class="film-search__field">
+          <input class="film-search__input" id="search-input-desktop" type="search" name="q" autocomplete="off" placeholder="Film title" aria-describedby="search-status-desktop">
+          <button class="film-search__submit" type="submit">Search</button>
+        </div>
+        <p class="film-search__status" id="search-status-desktop" role="status" data-search-status>
+          Demo search: no programme is loaded in this concept, so it won’t return real films.
+          Film results arrive with the What’s On demo in Section 4.
+        </p>
+      </form>
+      <button class="panel__close" type="button" data-close-search>
+        Close<span class="visually-hidden"> search</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile / tablet menu panel -->
+  <div class="mobile-menu" id="mobile-menu" hidden>
+    <div class="mobile-menu__inner">
+      <form class="film-search film-search--menu" role="search" aria-label="Film search (demo)" data-film-search>
+        <label class="film-search__label" for="search-input-menu">Search films</label>
+        <div class="film-search__field">
+          <input class="film-search__input" id="search-input-menu" type="search" name="q" autocomplete="off" placeholder="Film title" aria-describedby="search-status-menu">
+          <button class="film-search__submit" type="submit">Search</button>
+        </div>
+        <p class="film-search__status" id="search-status-menu" role="status" data-search-status>
+          Demo search: no programme is loaded yet, so it won’t return real films.
+        </p>
+      </form>
+
+      <nav aria-label="Main (menu)">
+        <ul class="mobile-menu__list">
+          <li><a class="mobile-menu__link" href="#whats-on">What’s On</a></li>
+          <li><a class="mobile-menu__link" href="#experiences">Experiences</a></li>
+          <li><a class="mobile-menu__link" href="#our-story">Our Story</a></li>
+          <li><a class="mobile-menu__link" href="#visit">Visit</a></li>
+        </ul>
+      </nav>
+
+      <p class="mobile-menu__note">Unofficial portfolio redesign concept. For real tickets visit
+        <a href="https://thekinemainthewoods.co.uk/" rel="noopener">the official website</a>.</p>
+    </div>
   </div>
-  <main>
-    <p>Redesign workspace — content to follow.</p>
+
+  <!-- Discreet, always-visible concept notice -->
+  <p class="concept-badge" id="concept-badge">
+    <span>Unofficial portfolio redesign concept</span>
+    <a href="https://thekinemainthewoods.co.uk/" rel="noopener">Official site<span class="visually-hidden"> (opens The Kinema in the Woods website)</span></a>
+  </p>
+
+  <main id="main" tabindex="-1">
+    <h1 class="visually-hidden">Kinema in the Woods — unofficial redesign concept</h1>
+
+    <!-- Temporary opening background (Section 2 will design the cinematic opening) -->
+    <section class="opening-temp" id="top" aria-label="Temporary opening background">
+      <div class="opening-temp__light" aria-hidden="true"></div>
+      <p class="placeholder-tag placeholder-tag--opening">
+        Temporary opening background · the cinematic opening is designed in Section 2
+      </p>
+    </section>
+
+    <!-- Labelled placeholders so navigation and scrolling can be tested -->
+    <section class="placeholder" id="whats-on" aria-labelledby="whats-on-title" tabindex="-1">
+      <div class="placeholder__inner">
+        <p class="placeholder-tag">Placeholder · designed in Section 4</p>
+        <h2 class="placeholder__title" id="whats-on-title">What’s On</h2>
+        <p class="placeholder__text">The film grid and filters will be designed here. Blocks below are demonstration filler for testing the header while scrolling.</p>
+        <div class="placeholder__grid" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="placeholder" id="experiences" aria-labelledby="experiences-title" tabindex="-1">
+      <div class="placeholder__inner">
+        <p class="placeholder-tag">Placeholder · designed in Section 8</p>
+        <h2 class="placeholder__title" id="experiences-title">Experiences</h2>
+        <p class="placeholder__text">Special screenings and experiences will be designed here.</p>
+        <div class="placeholder__grid placeholder__grid--wide" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="placeholder" id="our-story" aria-labelledby="our-story-title" tabindex="-1">
+      <div class="placeholder__inner">
+        <p class="placeholder-tag">Placeholder · designed in Section 7</p>
+        <h2 class="placeholder__title" id="our-story-title">Our Story</h2>
+        <p class="placeholder__text">Discover the Kinema — the venue, its woodland setting and verified history — will be designed here.</p>
+        <div class="placeholder__grid placeholder__grid--wide" aria-hidden="true">
+          <span></span><span></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="placeholder" id="visit" aria-labelledby="visit-title" tabindex="-1">
+      <div class="placeholder__inner">
+        <p class="placeholder-tag">Placeholder · designed in Section 10</p>
+        <h2 class="placeholder__title" id="visit-title">Visit</h2>
+        <p class="placeholder__text">Plan your visit — directions, parking, accessibility and contact — will be designed here.</p>
+        <div class="placeholder__grid placeholder__grid--wide" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+    </section>
   </main>
-  <script src="assets/js/main.js" defer></script>
+
+  <footer class="footer-temp">
+    <p>Placeholder footer · designed in Section 10.</p>
+    <p>Unofficial portfolio redesign concept — not affiliated with or endorsed by The Kinema in the Woods.
+      No real bookings, payments, accounts or subscriptions.</p>
+  </footer>
+
+  <!-- Booking demo placeholder -->
+  <dialog class="demo-dialog" id="booking-demo" aria-labelledby="booking-demo-title" aria-describedby="booking-demo-desc">
+    <div class="demo-dialog__inner">
+      <p class="demo-dialog__eyebrow">Demonstration</p>
+      <h2 class="demo-dialog__title" id="booking-demo-title">Booking demo coming in Section 6</h2>
+      <p id="booking-demo-desc">Seat selection and booking will be a clearly fictional demonstration.
+        No reservations, payments or accounts — nothing entered will be sent anywhere.</p>
+      <p>For real tickets, use <a href="https://thekinemainthewoods.co.uk/" rel="noopener">the official website</a>.</p>
+      <button class="btn-secondary" type="button" data-close-dialog>Close</button>
+    </div>
+  </dialog>
 </body>
 </html>
