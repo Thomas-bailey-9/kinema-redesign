@@ -1,8 +1,12 @@
 // Capture desktop + phone screenshots of a locally served page and report missing assets.
 // Usage: node tools/capture.mjs <url> <outDir> [prefix]
-// Uses the globally available Playwright (no project dependency). Writes PNGs and a JSON report.
+// Uses the globally available Playwright (no project dependency). Writes PNGs and a JSON report:
+//   <prefix>-<viewport>-fold.png          first screen at 2x
+//   <prefix>-<viewport>/NN.png            the whole page as consecutive viewport-sized sections (1x)
+// Chromium's single-image fullPage capture renders blank areas on very tall pages, so the page is
+// captured by scrolling instead.
 import { createRequire } from 'node:module';
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const require = createRequire(import.meta.url);
@@ -46,7 +50,21 @@ for (const vp of viewports) {
   }));
 
   await page.screenshot({ path: join(outDir, `${prefix}-${vp.name}-fold.png`) });
-  await page.screenshot({ path: join(outDir, `${prefix}-${vp.name}-full.png`), fullPage: true });
+
+  // Whole page as scrolled sections, at 1x to keep file sizes reasonable.
+  const segDir = join(outDir, `${prefix}-${vp.name}`);
+  rmSync(segDir, { recursive: true, force: true }); mkdirSync(segDir, { recursive: true });
+  const seg = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: 1, isMobile: vp.isMobile, hasTouch: vp.isMobile });
+  const sp = await seg.newPage();
+  await sp.goto(url, { waitUntil: 'networkidle', timeout: 60000 }).catch(() => {});
+  const total = await sp.evaluate(() => document.documentElement.scrollHeight);
+  let i = 0;
+  for (let y = 0; y < total; y += vp.height) {
+    await sp.evaluate(y => window.scrollTo(0, y), y); await sp.waitForTimeout(250);
+    await sp.screenshot({ path: join(segDir, `${String(++i).padStart(2, '0')}.png`) });
+  }
+  await seg.close();
+  dom.sections = i;
   report.viewports[vp.name] = { ...dom, failedRequests: failed, httpErrors, consoleErrors };
   await context.close();
 }
@@ -55,5 +73,5 @@ await browser.close();
 writeFileSync(join(outDir, `${prefix}-report.json`), JSON.stringify(report, null, 2));
 for (const [name, r] of Object.entries(report.viewports)) {
   console.log(`${name}: ${r.failedRequests.length} failed, ${r.httpErrors.length} HTTP errors, ` +
-    `${r.brokenImages.length} broken images, overflow ${r.horizontalOverflowPx}px, height ${r.pageHeight}px`);
+    `${r.brokenImages.length} broken images, overflow ${r.horizontalOverflowPx}px, height ${r.pageHeight}px, ${r.sections} sections`);
 }
