@@ -1,2 +1,26 @@
-# kinema-redesign
-showing a website, then converting it to make it look much better.
+# Kinema in the Woods — unofficial redesign concept
+
+An independent portfolio redesign concept for [thekinemainthewoods.co.uk](https://thekinemainthewoods.co.uk/).
+
+> **Unofficial portfolio concept.** This project is not affiliated with, endorsed by, or operated by
+> The Kinema in the Woods. Booking and seat selection are demonstrations only — no real payments,
+> accounts, bookings or form submissions. For real tickets, use the official website.
+
+## Layout
+
+| Path | Purpose | Tracked? |
+|------|---------|----------|
+| `site/` | The redesign (static HTML/CSS/JS). Published to GitHub Pages at `/kinema-redesign/`. | Yes |
+| `notes/BRIEF.md` | Agreed design direction and constraints | Yes |
+| `notes/CHANGELOG.md` | Log of design decisions | Yes |
+| `notes/REFERENCE.md` | Reference source URL, permission status, how to run the baseline | Yes |
+| `tools/` | Local helper scripts (serve, screenshot) — no installed dependencies | Yes |
+| `reference/` | Third-party homepage snapshot + baseline screenshots | **No** (git-ignored) |
+
+## Run locally
+
+```bash
+python3 -m http.server 8000 --directory site
+```
+
+Open http://localhost:8000/. See `notes/REFERENCE.md` for running the original reference snapshot.

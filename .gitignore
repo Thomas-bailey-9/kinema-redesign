@@ -1,0 +1,9 @@
+# Third-party reference material — never commit (public repo, no reuse permission established)
+reference/
+*.zip
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
